@@ -120,3 +120,34 @@
     background-color: rgba(0, 183, 255, 0.9);
     color: #ffffff;
 }
+/* --- Media Query para Dispositivos Móviles --- */
+/* Estos estilos se aplicarán solo si la pantalla mide 768px de ancho o menos */
+
+@media (max-width: 768px) {
+
+    /* Hacemos que la tarjeta se vuelva vertical */
+    .article-card {
+        flex-direction: column; /* Cambia de horizontal (row) a vertical (column) */
+        max-height: none;       /* Quitamos la altura máxima para que pueda crecer */
+    }
+
+    /* La imagen ahora ocupa todo el ancho */
+    .card-image-container {
+        flex-basis: auto;       /* El ancho ya no es fijo */
+        min-height: 180px;      /* Le damos una altura mínima a la imagen */
+        height: 180px;
+    }
+
+    /* Ajustamos el padding del contenido */
+    .card-content {
+        padding: 20px;
+    }
+
+    /* Centramos el botón y le damos más espacio */
+    .card-button {
+        align-self: center; /* Centra el botón */
+        width: 80%;         /* Hacemos el botón más grande y fácil de tocar */
+        text-align: center;
+        margin-top: 20px;
+    }
+}

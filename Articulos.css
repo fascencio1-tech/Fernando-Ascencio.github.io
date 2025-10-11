@@ -337,7 +337,7 @@ body {
 }
 
 /* === Responsive === */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     .articles {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -351,5 +351,34 @@ body {
         width: 100%;
         height: auto;
         max-height: 260px;
+    }
+}
+/* === Responsive adicional para las tarjetas de artículos === */
+@media (max-width: 768px) {
+
+    /* Hacemos que la tarjeta se vuelva vertical */
+    .article {
+        /* Tus tarjetas ya usan flex-direction: column, así que esto no es necesario */
+        /* Lo que sí podemos hacer es ajustar el padding para pantallas pequeñas */
+        padding: 15px;
+    }
+
+    /* Hacemos que la imagen ocupe todo el ancho de la tarjeta */
+    .article-body {
+        flex-direction: column;
+    }
+
+    .article img {
+        width: 100%; /* La imagen ocupará todo el ancho de la tarjeta */
+        height: 180px; /* Le damos una altura fija para consistencia */
+        object-fit: cover;
+    }
+    
+    /* Centramos el botón y lo hacemos más grande */
+    .read-more-btn {
+        align-self: center; /* Centra el botón */
+        width: 80%;         /* Hacemos el botón más grande y fácil de tocar */
+        text-align: center;
+        margin-top: 15px;
     }
 }

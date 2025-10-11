@@ -133,8 +133,9 @@ body {
     padding: 20px; /* Un poco de espacio para el contenido */
     color: #1486f1; /* Color de texto blanco para que contraste */
     /* Otros estilos para tu contenido */
-    max-width: 960px; /* Ancho máximo para el contenido */
-    margin: 0 auto; /* Centrar el contenido */
+    max-width: 1100px; /* Ancho máximo para el contenido */
+    width: 90%;
+    margin: 30px auto; /* Centrar el contenido */
     background-color: transparent; /* Fondo semitransparente para el contenido */
     border-radius: 10px;
     margin-top: 30px;
