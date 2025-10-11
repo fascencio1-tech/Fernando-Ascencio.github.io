@@ -1,0 +1,178 @@
+/* cards.css - VERSIÓN FINAL Y ROBUSTA con background-image */
+/* constelacionesBackground.css - Fondo etéreo animado para la sección de Constelaciones */
+
+body {
+    background-color: #07031A; /* Un azul muy oscuro, casi negro, con un toque de púrpura */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal del fondo */
+.background-container-constelaciones {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden; /* Oculta lo que se salga del contenedor del fondo */
+    background: radial-gradient(ellipse at center, rgba(13,13,26,0.6) 0%, rgba(0,0,0,0.9) 100%); /* Efecto más profundo */
+}
+
+/* --- Efecto de Polvo Estelar (Partículas) --- */
+/* Son solo divs pequeños que se animan */
+.stardust {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4); /* Partículas blancas semitransparentes */
+    border-radius: 50%;
+    animation: moveStardust 30s linear infinite alternate; /* Animación de movimiento */
+    filter: blur(0.5px); /* Efecto de desenfoque sutil */
+}
+
+/* Animación para el movimiento del polvo estelar */
+@keyframes moveStardust {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    50% { transform: translate(50vw, 50vh) scale(1.2); opacity: 0.6; }
+    100% { transform: translate(100vw, 0) scale(1); opacity: 0.4; }
+}
+
+
+/* --- Estrellas de fondo (idénticas a las genéricas pero con otro nombre para el script) --- */
+#stars-container-constelaciones .star {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle-constellations 8s infinite ease-in-out;
+}
+
+@keyframes twinkle-constellations {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* --- Elementos de Contenido --- */
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #e0e6f1;
+    max-width: 960px;
+    margin: 30px auto;
+    background-color: transparent; /* Fondo semitransparente oscuro para el contenido */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    min-height: calc(100vh - 60px);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    color: #f8f8f8;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+#articles-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.article-card {
+    background-color: rgba(21, 28, 46, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    backdrop-filter: blur(5px);
+    max-height: 220px;
+    transition: max-height 0.7s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card.expanded {
+    max-height: 1000px;
+}
+
+.article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 183, 255, 0.25);
+}
+
+.card-image-container {
+    flex-basis: 35%;
+    flex-shrink: 0;
+    min-height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.4s ease;
+}
+
+.article-card:hover .card-image-container {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    color: #c0c8e7;
+    flex-basis: 65%;
+    min-width: 0;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.card-summary,
+.card-full-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.card-summary {
+    margin-bottom: 20px;
+}
+
+.card-full-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out 0.2s;
+}
+
+.card-full-content p {
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.article-card.expanded .card-full-content {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.card-button {
+    background-color: rgba(45, 59, 92, 0.8);
+    color: #e0e6f1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    align-self: flex-start;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.card-button:hover {
+    background-color: rgba(0, 183, 255, 0.9);
+    color: #ffffff;
+}

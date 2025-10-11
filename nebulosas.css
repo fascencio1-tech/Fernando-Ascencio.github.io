@@ -1,0 +1,87 @@
+/* nebulosasBackground.css - Fondo animado para la sección de Nebulosas */
+
+body {
+    /* YA NO USAMOS 'overflow: hidden;' PARA PERMITIR EL SCROLL */
+    background-color: #04020a; /* Un negro muy oscuro, casi violeta */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal del fondo */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden; /* Esto es para el CONTENEDOR del fondo, no para el body */
+}
+
+/* La imagen de la nebulosa principal */
+.nebula-image {
+    position: absolute;
+    top: -15%; /* Más grande que la pantalla para el efecto de zoom y paneo */
+    left: -15%;
+    width: 130%; /* Ocupa más del 100% para poder animarla sin ver bordes */
+    height: 130%;
+    
+    /* URL de una imagen de nebulosa colorida. Puedes cambiarla por otra si prefieres. */
+    background-image: url('https://images.unsplash.com/photo-1507421394602-ef971b3074fe?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.8; /* Ligeramente transparente */
+    filter: saturate(1.2) brightness(0.9); /* Colores más vivos, un poco más oscuro */
+    
+    /* Animación sutil de paneo y zoom */
+    animation: nebula-pan 80s infinite alternate ease-in-out;
+}
+
+@keyframes nebula-pan {
+    0% {
+        transform: scale(1) translate(0, 0) rotate(0deg);
+        filter: saturate(1.2) brightness(0.9);
+    }
+    50% {
+        transform: scale(1.05) translate(3%, 5%) rotate(0.5deg); /* Se agranda y mueve ligeramente */
+        filter: saturate(1.3) brightness(1);
+    }
+    100% {
+        transform: scale(1) translate(-2%, -3%) rotate(-0.5deg);
+        filter: saturate(1.2) brightness(0.9);
+    }
+}
+
+/* Estrellas de fondo (idénticas a las genéricas pero con otro nombre para el script) */
+#stars-container-nebula .star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle-nebula 6s infinite ease-in-out; /* Parpadeo más rápido */
+}
+
+@keyframes twinkle-nebula {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.9; }
+}
+
+/* Envoltura del contenido para que sea legible */
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #e0e6f1; /* Color de texto más brillante */
+    max-width: 960px;
+    margin: 30px auto;
+    background-color: transparent; /* Fondo oscuro semitransparente para el contenido */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    min-height: calc(100vh - 60px);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada */
+}
+
+h1 {
+    color: #f8f8f8;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Resplandor más fuerte para el título */
+}

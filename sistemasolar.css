@@ -1,0 +1,286 @@
+/* cards.css - Estilos para las tarjetas de artículos expandibles */
+
+/* Contenedor principal para las cards */
+#articles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/* Estilo principal de la tarjeta */
+.article-card {
+    background-color: rgba(21, 28, 46, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+/* Efecto al pasar el mouse por encima */
+.article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 183, 255, 0.25);
+}
+
+/* Contenedor de la imagen */
+.card-image-container {
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.article-card:hover .card-image-container img {
+    transform: scale(1.05);
+}
+
+/* Contenido de la tarjeta (título, texto, botón) */
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Párrafo del resumen */
+.card-summary {
+    font-size: 0.95rem;
+    color: #c0c8e7;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Contenedor del contenido completo (oculto por defecto) */
+.card-full-content {
+    max-height: 0;
+    overflow: hidden;
+    color: #c0c8e7;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    transition: max-height 0.7s ease-in-out;
+}
+
+/* Párrafo dentro del contenido completo */
+.card-full-content p {
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+/* Estilo que se aplica cuando la tarjeta se expande */
+.article-card.expanded .card-full-content {
+    max-height: 1000px; /* Un valor alto para asegurar que quepa todo */
+}
+
+/* Botón "Leer más" */
+.card-button {
+    background-color: rgba(45, 59, 92, 0.8);
+    color: #e0e6f1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    align-self: flex-start;
+    cursor: pointer;
+    margin-top: auto; /* Empuja el botón al final */
+}
+
+.card-button:hover {
+    background-color: rgba(0, 183, 255, 0.9);
+    color: #ffffff;
+}
+
+body {
+    background-color: #000; /* Fondo negro para el espacio */
+    margin: 0; /* Elimina márgenes por defecto */
+    font-family: Arial, sans-serif;
+}
+
+.background-container {
+    position: fixed; /* Fija el fondo al viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ancho completo del viewport */
+    height: 100vh; /* Alto completo del viewport */
+    background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%); /* Efecto de viñeta sutil */
+    z-index: -1; /* Asegura que esté detrás del contenido */
+    perspective: 1000px; /* Para efectos 3D si quisiéramos en el futuro */
+}
+
+.content-wrapper {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative; /* Para que el contenido esté sobre el fondo */
+    z-index: 1; /* Asegura que el contenido sea visible */
+    padding: 20px; /* Un poco de espacio para el contenido */
+    color: #1486f1; /* Color de texto blanco para que contraste */
+    /* Otros estilos para tu contenido */
+    max-width: 960px; /* Ancho máximo para el contenido */
+    margin: 0 auto; /* Centrar el contenido */
+    background-color: transparent; /* Fondo semitransparente para el contenido */
+    border-radius: 10px;
+    margin-top: 30px;
+    min-height: calc(100vh - 60px); /* Para que ocupe casi toda la altura */
+}
+
+
+/* ESTRELLAS - ANIMACIÓN */
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0; /* Empieza invisible */
+    animation: twinkle 5s infinite ease-in-out; /* Animación de parpadeo */
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.7; }
+}
+
+/* SOL */
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #ffcc00, #ff6600); /* Degradado del sol */
+    border-radius: 50%;
+    box-shadow: 0 0 50px #ff9900, 0 0 100px #ff6600; /* Resplandor */
+    z-index: 0; /* Asegura que los planetas lo orbiten */
+}
+
+/* PLANETAS Y SUS ÓRBITAS */
+.planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: -50% -50%; /* El centro de rotación es el sol */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    z-index: 0;
+}
+
+/* Definición de los planetas */
+.mercury {
+    width: 10px;
+    height: 10px;
+    background-color: #b0a8a6;
+    animation: orbitMercury 10s linear infinite;
+}
+
+.venus {
+    width: 15px;
+    height: 15px;
+    background-color: #d8c39e;
+    animation: orbitVenus 16s linear infinite;
+}
+
+.earth {
+    width: 18px;
+    height: 18px;
+    background-color: #4a7d9c;
+    animation: orbitEarth 20s linear infinite;
+}
+
+.mars {
+    width: 13px;
+    height: 13px;
+    background-color: #c1440e;
+    animation: orbitMars 25s linear infinite;
+}
+
+.jupiter {
+    width: 40px;
+    height: 40px;
+    background-color: #d1b892;
+    animation: orbitJupiter 35s linear infinite;
+}
+
+.saturn {
+    width: 35px;
+    height: 35px;
+    background-color: #e0d0b0;
+    animation: orbitSaturn 45s linear infinite;
+    /* Anillo de Saturno, un poco más complejo */
+    box-shadow: 
+        0 0 0 8px rgba(255, 255, 255, 0.2) inset, /* anillo interior */
+        0 0 0 12px rgba(255, 255, 255, 0.1) inset; /* anillo exterior */
+}
+
+.uranus {
+    width: 25px;
+    height: 25px;
+    background-color: #87ceeb;
+    animation: orbitUranus 55s linear infinite;
+}
+
+.neptune {
+    width: 23px;
+    height: 23px;
+    background-color: #4169e1;
+    animation: orbitNeptune 65s linear infinite;
+}
+
+/* ANIMACIONES DE ÓRBITA */
+/* Los valores de translate determinan el radio de la órbita. Ajusta según quieras */
+
+@keyframes orbitMercury {
+    0% { transform: rotate(0deg) translateX(80px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(80px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitVenus {
+    0% { transform: rotate(0deg) translateX(120px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(120px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitEarth {
+    0% { transform: rotate(0deg) translateX(160px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(160px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitMars {
+    0% { transform: rotate(0deg) translateX(200px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(200px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitJupiter {
+    0% { transform: rotate(0deg) translateX(260px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(260px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitSaturn {
+    0% { transform: rotate(0deg) translateX(330px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(330px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitUranus {
+    0% { transform: rotate(0deg) translateX(400px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(400px) translateY(0) rotate(360deg); }
+}
+
+@keyframes orbitNeptune {
+    0% { transform: rotate(0deg) translateX(460px) translateY(0) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(460px) translateY(0) rotate(360deg); }
+}

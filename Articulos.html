@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artículos Científicos</title>
+    <link rel="stylesheet" href="Articulos.css" />
+
+    <!-- Fondo animado -->
+    <div class="stars"></div>
+    <div class="nebula"></div>
+</head>
+
+<body>
+    <!-- Sidebar superior -->
+<header class="top-sidebar">
+  <div class="logo">STELLAR VIEW</div>
+  <nav class="nav-links">
+    <a href="Articulos.html">Inicio</a>
+    <a href="Articulos.html">Artículos</a>
+    <div class="dropdown">
+      <a href="#">Más ▾</a>
+      <div class="dropdown-content">
+        <a href="sistemaSolar.html">Sistema Solar</a>
+        <a href="nebulosas.html">Nebulosas</a>
+        <a href="constelaciones.html">Constelaciones</a>
+        <a href="galaxias.html">Galaxias</a>
+
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <div class="container content">
+        <!-- Encabezado -->
+        <header class="hero" role="banner">
+            <h1>Artículos</h1>
+            <p>
+                Aquí vas a encontrar artículos, investigaciones, todo sobre el universo:
+                planetas, nebulosas, constelaciones, etc.
+            </p>
+            <h6>
+                ACLARACIÓN: Muchos de estos artículos los tomo de otras páginas, otras
+                son investigaciones mías. En cada publicación viene referenciado de
+                dónde saqué la información.
+            </h6>
+        </header>
+
+        <!-- Contenedor para artículos -->
+        <main id="articles" class="articles" role="main"></main>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'articulos_db_v1';
+        const container = document.getElementById('articles');
+
+        function readStorage() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function escapeHtml(s) {
+            return String(s || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function formatContent(s) {
+            return escapeHtml(s || '').replace(/\n/g, '<br>');
+        }
+
+        function render() {
+            const items = readStorage().sort((a, b) => b.updatedAt - a.updatedAt);
+            container.innerHTML = '';
+
+            if (items.length === 0) {
+                container.innerHTML =
+                    '<div style="color:rgba(255,255,255,0.6)">No hay artículos publicados.</div>';
+                return;
+            }
+
+            for (const art of items) {
+                const el = document.createElement('article');
+                el.className = 'article';
+                const imgHtml = art.imageData
+                    ? `<img src="${art.imageData}" alt="${escapeHtml(art.title)}">`
+                    : '';
+                const full = formatContent(art.content || '');
+                const short = escapeHtml((art.content || '').slice(0, 220));
+                const needsReadMore = (art.content || '').length > 220;
+                const uid = art.id ? String(art.id) : 'a-' + Math.random().toString(36).slice(2, 9);
+
+                el.innerHTML = `
+          <h2 class="article-title">${escapeHtml(art.title)}</h2>
+          <div class="article-body">
+            ${imgHtml}
+            <div class="excerpt">
+              <p>${short}${needsReadMore ? '...' : ''}</p>
+              ${needsReadMore
+                        ? `<button class="read-more-btn" aria-expanded="false" aria-controls="full-${uid}">Leer más</button>`
+                        : ''
+                    }
+              <div id="full-${uid}" class="full-content" aria-hidden="true">${full}</div>
+            </div>
+          </div>
+        `;
+                container.appendChild(el);
+            }
+        }
+
+        container.addEventListener('click', function (e) {
+            const btn = e.target.closest && e.target.closest('.read-more-btn');
+            if (!btn) return;
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            const targetId = btn.getAttribute('aria-controls');
+            const content = document.getElementById(targetId);
+            if (!content) return;
+
+            if (expanded) {
+                btn.setAttribute('aria-expanded', 'false');
+                content.classList.remove('expanded');
+                content.setAttribute('aria-hidden', 'true');
+                btn.textContent = 'Leer más';
+            } else {
+                btn.setAttribute('aria-expanded', 'true');
+                content.classList.add('expanded');
+                content.setAttribute('aria-hidden', 'false');
+                btn.textContent = 'Leer menos';
+            }
+        });
+
+        render();
+    </script>
+</body>
+
+</html>

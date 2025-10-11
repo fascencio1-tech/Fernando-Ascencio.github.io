@@ -1,0 +1,183 @@
+/* cards.css - VERSIÓN FINAL Y ROBUSTA con background-image */
+
+#articles-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.article-card {
+    background-color: rgba(21, 28, 46, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    backdrop-filter: blur(5px);
+    max-height: 220px;
+    transition: max-height 0.7s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card.expanded {
+    max-height: 1000px;
+}
+
+.article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 183, 255, 0.25);
+}
+
+/* --- ESTA ES LA SECCIÓN MÁS MODIFICADA --- */
+.card-image-container {
+    flex-basis: 35%;
+    flex-shrink: 0;
+    min-height: 220px;
+    background-size: cover; /* Asegura que la imagen de fondo cubra el área */
+    background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    transition: transform 0.4s ease;
+}
+
+.article-card:hover .card-image-container {
+    transform: scale(1.05); /* El efecto de zoom ahora se aplica al contenedor */
+}
+/* Ya no necesitamos estilos para 'img' porque no existe */
+
+.card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    color: #c0c8e7;
+    flex-basis: 65%;
+    min-width: 0;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.card-summary,
+.card-full-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.card-summary {
+    margin-bottom: 20px;
+}
+
+.card-full-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out 0.2s;
+}
+
+.card-full-content p {
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.article-card.expanded .card-full-content {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.card-button {
+    background-color: rgba(45, 59, 92, 0.8);
+    color: #e0e6f1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    align-self: flex-start;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.card-button:hover {
+    background-color: rgba(0, 183, 255, 0.9);
+    color: #ffffff;
+}
+/* galaxiasBackground.css - Fondo animado para la sección de Galaxias */
+
+body {
+    /* Eliminamos 'overflow: hidden;' para permitir el scroll */
+    background-color: #040409; /* Un negro muy profundo */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal del fondo */
+.background-container-galaxias {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden; /* Oculta lo que se salga del contenedor del fondo */
+}
+
+/* La imagen de la galaxia */
+.galaxy-image {
+    position: absolute;
+    top: -10%; /* Un poco más grande que la pantalla para el efecto de zoom */
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    /* URL de una imagen de Andrómeda de alta calidad */
+    background-image: url('https://images.unsplash.com/photo-1614726353362-7344b5f79e39?q=80&w=2574&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.7; /* Ligeramente transparente para que no sea abrumador */
+    
+    /* Animación sutil de paneo y zoom para dar sensación de movimiento */
+    animation: galaxy-pan 60s infinite alternate ease-in-out;
+}
+
+@keyframes galaxy-pan {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        transform: scale(1.1) translate(5%, 2%); /* Se agranda y mueve ligeramente */
+    }
+}
+
+/* Contenedor del contenido para que sea legible */
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #e0e0e0;
+    max-width: 960px;
+    margin: 30px auto;
+    background-color: transparent; /* Fondo oscuro semitransparente */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    min-height: calc(100vh - 60px);
+}
+
+/* Estrellas de fondo */
+#stars-container-galaxias .star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle-galaxy 7s infinite ease-in-out;
+}
+
+@keyframes twinkle-galaxy {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.8; }
+}

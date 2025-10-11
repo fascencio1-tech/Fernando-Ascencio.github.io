@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constelaciones</title>
+
+  <link rel="stylesheet" href="constelaciones.css">
+  <link rel="stylesheet" href="cards.css">
+
+</head>
+
+<body>
+
+  <div class="background-container-constelaciones">
+    <div class="constellation orion"></div>
+    <div class="constellation ursa-major"></div>
+    <div class="constellation cassiopeia"></div>
+    <div id="stars-container-constelaciones"></div>
+  </div>
+
+  <div class="content-wrapper">
+    <h1>Bienvenido a la sección de Constelaciones</h1>
+
+    <div id="articles-container"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const starsContainer = document.getElementById('stars-container-constelaciones');
+      if (starsContainer) {
+        const numStars = 60;
+        for (let i = 0; i < numStars; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          star.style.left = Math.random() * 100 + 'vw';
+          star.style.top = Math.random() * 100 + 'vh';
+          const size = Math.random() * 2 + 0.5;
+          star.style.width = size + 'px';
+          star.style.height = size + 'px';
+          star.style.animationDelay = Math.random() * 6 + 's';
+          starsContainer.appendChild(star);
+        }
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const path = window.location.pathname;
+      const pageName = path.split("/").pop();
+      const storageKey = pageName.replace('.html', '_db');
+
+      const articlesContainer = document.getElementById('articles-container');
+
+      if (!articlesContainer) {
+        console.error('Error: No se encontró el elemento #articles-container.');
+        return;
+      }
+
+      const articles = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+      if (articles.length === 0) {
+        articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
+        return;
+      }
+
+      articlesContainer.innerHTML = '';
+
+      articles.forEach(article => {
+        const articleCard = document.createElement('div');
+        articleCard.className = 'article-card';
+
+        const summary = article.content.length > 150
+          ? article.content.slice(0, 150) + '...'
+          : article.content;
+
+        // Creamos una variable para el estilo del fondo. Si no hay imagen, queda vacía.
+        const imageStyle = article.imageData ? `style="background-image: url('${article.imageData}');"` : '';
+
+        articleCard.innerHTML = `
+                    <div class="card-image-container" ${imageStyle}></div>
+                    
+                    <div class="card-content">
+                        <h2 class="card-title">${article.title}</h2>
+                        <p class="card-summary">${summary}</p>
+                        <div class="card-full-content">
+                            <p>${article.content}</p>
+                        </div>
+                        <button class="card-button">Leer más</button>
+                    </div>
+                `;
+
+        articlesContainer.appendChild(articleCard);
+
+        const readMoreBtn = articleCard.querySelector('.card-button');
+
+        readMoreBtn.addEventListener('click', () => {
+          const card = readMoreBtn.closest('.article-card');
+          card.classList.toggle('expanded');
+
+          if (card.classList.contains('expanded')) {
+            readMoreBtn.textContent = 'Leer menos';
+          } else {
+            readMoreBtn.textContent = 'Leer más';
+          }
+        });
+      });
+    });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const starsContainer = document.getElementById('stars-container-constelaciones');
+      if (starsContainer) {
+            // Estrellas normales (menos para que no compitan con el polvo estelar)
+            const numStars = 80;
+      for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      const size = Math.random() * 2 + 0.5;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.animationDelay = Math.random() * 8 + 's';
+      starsContainer.appendChild(star);
+            }
+
+      // --- Generador de Polvo Estelar (¡NUEVO!) ---
+      const numStardust = 40; // Cantidad de partículas de polvo
+      const backgroundContainer = document.querySelector('.background-container-constelaciones'); // Contenedor para el polvo
+
+      for (let i = 0; i < numStardust; i++) {
+                const dust = document.createElement('div');
+      dust.className = 'stardust';
+      const size = Math.random() * 5 + 2; // Tamaño de las partículas (2-7px)
+      dust.style.width = size + 'px';
+      dust.style.height = size + 'px';
+      dust.style.left = Math.random() * 100 + 'vw';
+      dust.style.top = Math.random() * 100 + 'vh';
+      dust.style.animationDelay = Math.random() * 30 + 's'; // Desfase para la animación
+      backgroundContainer.appendChild(dust);
+            }
+        }
+    });
+  </script>
+</body>
+
+</html>
