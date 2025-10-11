@@ -1,0 +1,51 @@
+[
+  {
+    "id": "articulo01",
+    "page": "articulos",
+    "title": "Bienvenidos a Stellar View",
+    "content": "Aquí vas a encontrar artículos, investigaciones, y todo sobre el universo: planetas, nebulosas, constelaciones, etc. Muchos de estos artículos los tomo de otras páginas, mientras que otros son investigaciones mías. Cada publicación viene referenciada.",
+    "imageData": "images/hero-background.jpg"
+  },
+  {
+    "id": "articulo02",
+    "page": "articulos",
+    "title": "La Importancia de la Exploración Espacial",
+    "content": "La exploración espacial no solo expande nuestro conocimiento del universo, sino que también impulsa la innovación tecnológica que beneficia a la humanidad en la Tierra. Desde el GPS hasta avances médicos, la carrera espacial ha dejado un legado invaluable.",
+    "imageData": "images/space-exploration.jpg"
+  },
+  {
+    "id": "solsis01",
+    "page": "sistemaSolar",
+    "title": "Marte: El Planeta Rojo",
+    "content": "Marte ha fascinado a la humanidad durante siglos. Con su característico color rojo, casquetes polares y la posibilidad de haber albergado vida en el pasado, sigue siendo el principal objetivo de futuras misiones tripuladas.",
+    "imageData": "images/mars.jpg"
+  },
+  {
+    "id": "solsis02",
+    "page": "sistemaSolar",
+    "title": "Júpiter: El Gigante Gaseoso",
+    "content": "Júpiter es el planeta más grande de nuestro Sistema Solar. Su característica más famosa es la Gran Mancha Roja, una tormenta gigantesca más grande que la Tierra que ha estado activa durante cientos de años.",
+    "imageData": "images/jupiter.jpg"
+  },
+  {
+    "id": "nebula01",
+    "page": "nebulosas",
+    "title": "La Nebulosa de Orión",
+    "content": "Visible a simple vista, la Nebulosa de Orión es una de las guarderías estelares más cercanas y estudiadas. Dentro de sus nubes de gas y polvo, nuevas estrellas y sistemas planetarios están en pleno proceso de formación.",
+    "imageData": "images/orion-nebula.jpg"
+  },
+  {
+    "id": "galaxy01",
+    "page": "galaxias",
+    "title": "Andrómeda: Nuestra Vecina Galáctica",
+    "content": "La galaxia de Andrómeda es la galaxia espiral más grande y cercana a la Vía Láctea. Se encuentra en curso de colisión con nuestra galaxia, un evento que ocurrirá en aproximadamente 4.5 mil millones de años.",
+    "imageData": "images/andromeda.jpg"
+  },
+  {
+    "id": "const01",
+    "page": "constelaciones",
+    "title": "La Osa Mayor y la Estrella Polar",
+    "content": "La Osa Mayor es una de las constelaciones más reconocibles del hemisferio norte. Dos de sus estrellas, Merak y Dubhe, son conocidas como 'las apuntadoras' porque señalan directamente a Polaris, la Estrella del Norte.",
+    "imageData": "images/ursa-major.jpg"
+  }
+]

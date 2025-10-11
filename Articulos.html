@@ -2,144 +2,109 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artículos Científicos</title>
-    <link rel="stylesheet" href="Articulos.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículos Generales</title>
 
-    <!-- Fondo animado -->
-    <div class="stars"></div>
-    <div class="nebula"></div>
+    <link rel="stylesheet" href="Articulos.css">
 </head>
 
 <body>
-    <!-- Sidebar superior -->
-<header class="top-sidebar">
-  <div class="logo">STELLAR VIEW</div>
-  <nav class="nav-links">
-    <a href="Articulos.html">Inicio</a>
-    <a href="Articulos.html">Artículos</a>
-    <div class="dropdown">
-      <a href="#">Más ▾</a>
-      <div class="dropdown-content">
-        <a href="sistemaSolar.html">Sistema Solar</a>
-        <a href="nebulosas.html">Nebulosas</a>
-        <a href="constelaciones.html">Constelaciones</a>
-        <a href="galaxias.html">Galaxias</a>
 
-      </div>
-    </div>
-  </nav>
-</header>
+    <header class="top-sidebar">
+        <div class="logo">STELLAR VIEW</div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="Articulos.html">Artículos</a>
+            <div class="dropdown">
+                <a href="#">Más ▾</a>
+                <div class="dropdown-content">
+                    <a href="sistemaSolar.html">Sistema Solar</a>
+                    <a href="nebulosas.html">Nebulosas</a>
+                    <a href="constelaciones.html">Constelaciones</a>
+                    <a href="galaxias.html">Galaxias</a>
+                    <a href="Galeria.html">Galería</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <div class="stars"></div>
+    <div class="nebula"></div>
 
-    <div class="container content">
-        <!-- Encabezado -->
-        <header class="hero" role="banner">
-            <h1>Artículos</h1>
-            <p>
-                Aquí vas a encontrar artículos, investigaciones, todo sobre el universo:
-                planetas, nebulosas, constelaciones, etc.
-            </p>
-            <h6>
-                ACLARACIÓN: Muchos de estos artículos los tomo de otras páginas, otras
-                son investigaciones mías. En cada publicación viene referenciado de
-                dónde saqué la información.
-            </h6>
-        </header>
+    <div class="container">
+        <main class="content">
+            <section class="hero">
+                <h1>Artículos</h1>
+                <p>Aquí vas a encontrar artículos, investigaciones, todo sobre el universo: planetas, nebulosas,
+                    constelaciones, etc.</p>
+                <h6>ACLARACIÓN: Muchos de estos artículos los tomo de otras páginas, otras son investigaciones mías. En
+                    cada publicación viene referenciado de dónde saqué la información.</h6>
+            </section>
 
-        <!-- Contenedor para artículos -->
-        <main id="articles" class="articles" role="main"></main>
+            <div id="articles-container" class="articles"></div>
+        </main>
     </div>
 
     <script>
-        const STORAGE_KEY = 'articulos_db_v1';
-        const container = document.getElementById('articles');
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Identificador único para esta página
+            const pageIdentifier = 'articulos';
 
-        function readStorage() {
+            const articlesContainer = document.getElementById('articles-container');
+
             try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                return raw ? JSON.parse(raw) : [];
-            } catch (e) {
-                return [];
-            }
-        }
+                const response = await fetch('publications.json');
+                if (!response.ok) throw new Error('No se encontró publications.json');
+                const allArticles = await response.json();
 
-        function escapeHtml(s) {
-            return String(s || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
+                const articlesForThisPage = allArticles.filter(article => article.page === pageIdentifier);
 
-        function formatContent(s) {
-            return escapeHtml(s || '').replace(/\n/g, '<br>');
-        }
+                if (articlesForThisPage.length === 0) {
+                    articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
+                    return;
+                }
 
-        function render() {
-            const items = readStorage().sort((a, b) => b.updatedAt - a.updatedAt);
-            container.innerHTML = '';
+                articlesContainer.innerHTML = '';
 
-            if (items.length === 0) {
-                container.innerHTML =
-                    '<div style="color:rgba(255,255,255,0.6)">No hay artículos publicados.</div>';
-                return;
-            }
+                // En esta página, usamos un diseño diferente (el que ya tenías)
+                articlesForThisPage.forEach(article => {
+                    const articleDiv = document.createElement('div');
+                    articleDiv.className = 'article';
 
-            for (const art of items) {
-                const el = document.createElement('article');
-                el.className = 'article';
-                const imgHtml = art.imageData
-                    ? `<img src="${art.imageData}" alt="${escapeHtml(art.title)}">`
-                    : '';
-                const full = formatContent(art.content || '');
-                const short = escapeHtml((art.content || '').slice(0, 220));
-                const needsReadMore = (art.content || '').length > 220;
-                const uid = art.id ? String(art.id) : 'a-' + Math.random().toString(36).slice(2, 9);
+                    const summary = article.content.length > 200 ? article.content.slice(0, 200) + '...' : article.content;
 
-                el.innerHTML = `
-          <h2 class="article-title">${escapeHtml(art.title)}</h2>
-          <div class="article-body">
-            ${imgHtml}
-            <div class="excerpt">
-              <p>${short}${needsReadMore ? '...' : ''}</p>
-              ${needsReadMore
-                        ? `<button class="read-more-btn" aria-expanded="false" aria-controls="full-${uid}">Leer más</button>`
-                        : ''
-                    }
-              <div id="full-${uid}" class="full-content" aria-hidden="true">${full}</div>
-            </div>
-          </div>
-        `;
-                container.appendChild(el);
-            }
-        }
+                    articleDiv.innerHTML = `
+                        <h2 class="article-title">${article.title}</h2>
+                        <div class="article-body">
+                            <img src="${article.imageData || ''}" alt="${article.title}">
+                            <div class="excerpt">
+                                <p>${summary}</p>
+                            </div>
+                        </div>
+                        <div class="full-content">
+                            <p>${article.content}</p>
+                        </div>
+                        <button class="read-more-btn">Leer más</button>
+                    `;
 
-        container.addEventListener('click', function (e) {
-            const btn = e.target.closest && e.target.closest('.read-more-btn');
-            if (!btn) return;
-            const expanded = btn.getAttribute('aria-expanded') === 'true';
-            const targetId = btn.getAttribute('aria-controls');
-            const content = document.getElementById(targetId);
-            if (!content) return;
+                    articlesContainer.appendChild(articleDiv);
 
-            if (expanded) {
-                btn.setAttribute('aria-expanded', 'false');
-                content.classList.remove('expanded');
-                content.setAttribute('aria-hidden', 'true');
-                btn.textContent = 'Leer más';
-            } else {
-                btn.setAttribute('aria-expanded', 'true');
-                content.classList.add('expanded');
-                content.setAttribute('aria-hidden', 'false');
-                btn.textContent = 'Leer menos';
+                    const readMoreBtn = articleDiv.querySelector('.read-more-btn');
+                    const fullContent = articleDiv.querySelector('.full-content');
+
+                    readMoreBtn.addEventListener('click', () => {
+                        fullContent.classList.toggle('expanded');
+                        readMoreBtn.textContent = fullContent.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
+                    });
+                });
+            } catch (error) {
+                console.error('Error al cargar las publicaciones:', error);
+                articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar las publicaciones.</p>';
             }
         });
-
-        render();
     </script>
+
 </body>
 
 </html>

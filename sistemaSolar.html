@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Solar</title>
-    
+
     <link rel="stylesheet" href="sistemasolar.css">
     <link rel="stylesheet" href="cards.css">
 
 </head>
+
 <body>
 
     <div class="background-container">
@@ -26,9 +28,9 @@
 
     <div class="content-wrapper">
         <h1>Bienvenido a la sección del Sistema Solar!
-          Aquí encontrarás todo tipo de artículos relacionados con los planetas, el sol, la luna y otros cuerpos celestes que forman parte de nuestro sistema solar.
+            Aquí encontrarás todo tipo de artículos relacionados con los planetas, el sol, la luna y otros cuerpos
+            celestes que forman parte de nuestro sistema solar.
         </h1>
-        
         <div id="articles-container"></div>
     </div>
 
@@ -51,68 +53,72 @@
             }
         });
     </script>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const path = window.location.pathname;
-            const pageName = path.split("/").pop();
-            const storageKey = pageName.replace('.html', '_db');
-            
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Identificador único de esta página (¡CORREGIDO!)
+            const pageIdentifier = 'sistemaSolar';
+
             const articlesContainer = document.getElementById('articles-container');
-            
-            if (!articlesContainer) {
-                console.error('Error: No se encontró el elemento #articles-container.');
-                return;
-            }
 
-            const articles = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            try {
+                // 2. Leemos el archivo JSON central
+                const response = await fetch('publications.json');
+                if (!response.ok) {
+                    throw new Error('No se pudo encontrar el archivo publications.json');
+                }
+                const allArticles = await response.json();
 
-            if (articles.length === 0) {
-                articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
-                return;
-            }
+                // 3. Filtramos para obtener solo los artículos de ESTA página
+                const articlesForThisPage = allArticles.filter(article => article.page === pageIdentifier);
 
-            articlesContainer.innerHTML = '';
+                if (articlesForThisPage.length === 0) {
+                    articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
+                    return;
+                }
 
-            articles.forEach(article => {
-                const articleCard = document.createElement('div');
-                articleCard.className = 'article-card';
+                articlesContainer.innerHTML = '';
 
-                const summary = article.content.length > 150 
-                    ? article.content.slice(0, 150) + '...' 
-                    : article.content;
+                // 4. Creamos las tarjetas con los datos filtrados
+                articlesForThisPage.forEach(article => {
+                    const articleCard = document.createElement('div');
+                    articleCard.className = 'article-card';
 
-                articleCard.innerHTML = `
-                    <div class="card-image-container">
-                        ${article.imageData ? `<img src="${article.imageData}" alt="${article.title}">` : ''}
-                    </div>
-                    <div class="card-content">
-                        <h2 class="card-title">${article.title}</h2>
-                        <p class="card-summary">${summary}</p>
-                        <div class="card-full-content">
-                            <p>${article.content}</p>
+                    const summary = article.content.length > 150
+                        ? article.content.slice(0, 150) + '...'
+                        : article.content;
+
+                    const imageStyle = article.imageData ? `style="background-image: url('${article.imageData}');"` : '';
+
+                    articleCard.innerHTML = `
+                        <div class="card-image-container" ${imageStyle}></div>
+                        <div class="card-content">
+                            <h2 class="card-title">${article.title}</h2>
+                            <p class="card-summary">${summary}</p>
+                            <div class="card-full-content">
+                                <p>${article.content}</p>
+                            </div>
+                            <button class="card-button">Leer más</button>
                         </div>
-                        <button class="card-button">Leer más</button>
-                    </div>
-                `;
+                    `;
 
-                articlesContainer.appendChild(articleCard);
+                    articlesContainer.appendChild(articleCard);
 
-                const readMoreBtn = articleCard.querySelector('.card-button');
-                
-                readMoreBtn.addEventListener('click', () => {
-                    const card = readMoreBtn.closest('.article-card');
-                    card.classList.toggle('expanded');
-                    
-                    if (card.classList.contains('expanded')) {
-                        readMoreBtn.textContent = 'Leer menos';
-                    } else {
-                        readMoreBtn.textContent = 'Leer más';
-                    }
+                    const readMoreBtn = articleCard.querySelector('.card-button');
+                    readMoreBtn.addEventListener('click', () => {
+                        const card = readMoreBtn.closest('.article-card');
+                        card.classList.toggle('expanded');
+                        readMoreBtn.textContent = card.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
+                    });
                 });
-            });
+
+            } catch (error) {
+                console.error('Error al cargar las publicaciones:', error);
+                articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar las publicaciones.</p>';
+            }
         });
     </script>
 
 </body>
+
 </html>
