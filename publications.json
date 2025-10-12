@@ -2,50 +2,36 @@
   {
     "id": "articulo01",
     "page": "articulos",
-    "title": "Bienvenidos a Stellar View",
-    "content": "Aquí vas a encontrar artículos, investigaciones, y todo sobre el universo: planetas, nebulosas, constelaciones, etc. Muchos de estos artículos los tomo de otras páginas, mientras que otros son investigaciones mías. Cada publicación viene referenciada.",
-    "imageData": "images/hero-background.jpg"
+    "title": "EL BIG BANG: EL INICIO DE TODO",
+    "content": "En la actualidad estamos acostumbrados a cuestionar cordialmente los temas científicos, pero en 1931, Lemaître no solo enfrentó críticas, sino también una abierta hostilidad por parte de la comunidad científica. Muchos pensaban que aceptar esta teoría podría dar sustento a creencias religiosas sobre la creación, algo que se veía como incompatible con la ciencia, que debe ser demostrativa. La teoría de Lemaître vivió décadas de controversias, pues para muchos científicos era más sencillo aceptar un universo sin un inicio.El físico Alexander Friedmann fue uno de los primeros en aplicar las ecuaciones de la relatividad de Einstein a un modelo que mostraba un universo en expansión. Su trabajo fue publicado en 1922 y desafiaba la visión predominante de un universo estático. Posteriormente, Georges Lemaitre en 1927, basándose en las leyes de la termodinámica obtuvo también, y de forma independiente al trabajo de Friedman, que el universo no era estático, que lo llevaría a proponer la idea del Big Bang.Lemaître mostró su trabajo a Einstein, quien inmediatamente respondió: He leído su artículo, sus cálculos son correctos, pero su física es abominable. Einstein, como muchos científicos de su generación, se aferraba a la idea de un universo infinito e invariante, por lo cual, agregó una constante a su teoría de la relatividad general para obtener un universo cerrado, estable y estático. Articulo original: El Big Bang: la punta del iceberg que detonó más interrogantes sobre el origen del universo. (s/f). Acmor.org. Recuperado el 12 de octubre de 2025, de https://acmor.org/publicaciones/el-big-bang-la-punta-del-iceberg-que-deton-m-s-interrogantes-sobre-el-origen-del-universo",
+    "imageData": "https://acmor.org/storage/uploads/ing%203_1743441184.jpg"
   },
   {
     "id": "articulo02",
     "page": "articulos",
-    "title": "La Importancia de la Exploración Espacial",
-    "content": "La exploración espacial no solo expande nuestro conocimiento del universo, sino que también impulsa la innovación tecnológica que beneficia a la humanidad en la Tierra. Desde el GPS hasta avances médicos, la carrera espacial ha dejado un legado invaluable.",
-    "imageData": "images/space-exploration.jpg"
+    "title": "AGUJEROS NEGROS: UN AVISMO DENTRO DEL GRAN VACÍO",
+    "content": "Un agujero negro es un objeto con una gravedad tan intensa que nada, ni siquiera la luz, puede escapar de él. Su límite, llamado horizonte de sucesos, marca el punto donde la velocidad necesaria para escapar supera la de la luz. Existen tres tipos principales: De masa estelar, que se forman tras el colapso de estrellas muy masivas (más de 20 veces el Sol). Supermasivos, ubicados en el centro de las galaxias, con millones o miles de millones de masas solares. De masa intermedia, propuestos teóricamente y confirmados parcialmente en 2019 con el evento GW190521, donde dos agujeros negros menores se fusionaron para crear uno de 142 masas solares, detectado por LIGO. Los agujeros negros crecen al absorber gas, estrellas u otros agujeros negros. En 2019 se obtuvo la primera imagen real de uno gracias al Telescopio de Horizonte de Sucesos (EHT), que mostró el agujero negro supermasivo en la galaxia M87, con una masa de más de 6 mil millones de soles. Otro avance clave ocurrió en 2015, cuando LIGO detectó por primera vez ondas gravitacionales, confirmando una predicción de Einstein y permitiendo estudiar la fusión de agujeros negros en detalle. Otro avance clave ocurrió en 2015, cuando LIGO detectó por primera vez ondas gravitacionales, confirmando una predicción de Einstein y permitiendo estudiar la fusión de agujeros negros en detalle.",
+    "imageData": "https://ciencia.nasa.gov/wp-content/uploads/sites/2/2024/05/screenshot-2024-05-09-at-4-52-07%E2%80%AFpm.png?resize=1200,693"
   },
   {
     "id": "solsis01",
     "page": "sistemaSolar",
-    "title": "Marte: El Planeta Rojo",
-    "content": "Marte ha fascinado a la humanidad durante siglos. Con su característico color rojo, casquetes polares y la posibilidad de haber albergado vida en el pasado, sigue siendo el principal objetivo de futuras misiones tripuladas.",
-    "imageData": "images/mars.jpg"
+    "title": "EL SISTEMA SOLAR Y COMO SE CREE QUE SE CREÓ",
+    "content": "El sistema solar es un sistema planetario constituido por una estrella que ejerce atracción gravitacional sobre los cuerpos celestes que giran a su alrededor. Según la NASA, se cree que nuestro sistema solar se formó a partir de una sola nube plana de gas. Otra teoría, indica que se formó cuando un objeto de gran tamaño pasó cerca del Sol, y empujó una corriente de gas lejos de él. Esta última explicación sugiere que los planetas surgieron de esta corriente gaseosa. Independientemente de cómo fue su origen, la agencia espacial estadounidense estima que este complejo sistema existe desde hace más de 4 mil millones de años.  ARTICULO ORIGINAL: ¿Qué es el Sistema Solar y cómo está compuesto? (2022, octubre 18). National Geographic. https://www.nationalgeographicla.com/espacio/2022/10/que-es-el-sistema-solar-y-como-esta-compuesto",
+    "imageData": "https://static.nationalgeographicla.com/files/styles/image_3200/public/ceres-nasa.webp?w=789&h=570"
   },
   {
     "id": "solsis02",
     "page": "sistemaSolar",
-    "title": "Júpiter: El Gigante Gaseoso",
-    "content": "Júpiter es el planeta más grande de nuestro Sistema Solar. Su característica más famosa es la Gran Mancha Roja, una tormenta gigantesca más grande que la Tierra que ha estado activa durante cientos de años.",
-    "imageData": "images/jupiter.jpg"
+    "title": "LOS SECRETOS MENOS CONOCIDOS DEL SISTEMA SOLAR",
+    "content": "Aunque el Sistema Solar parece familiar, esconde curiosidades sorprendentes que aún intrigan a los astrónomos. Por ejemplo, Venus gira al revés: su rotación es retrógrada, lo que significa que el Sol sale por el oeste y se pone por el este. Además, un día en Venus dura más que su propio año: 243 días terrestres frente a los 225 que tarda en orbitar al Sol. Júpiter, el planeta más grande, no solo tiene tormentas gigantes como la Gran Mancha Roja, sino que también emite más calor del que recibe. Esto sugiere que su interior aún se está contrayendo, liberando energía desde su formación. Saturno, por su parte, flotaría en agua si existiera una bañera lo bastante grande, debido a su bajísima densidad. Además, sus anillos son extremadamente delgados: aunque miden cientos de miles de kilómetros de ancho, su grosor apenas llega a unos pocos metros. Más allá, Urano rota prácticamente de lado, con un eje inclinado 98 grados. Se cree que una colisión titánica en el pasado volcó el planeta entero. Y en los confines del Sistema Solar, Neptuno tiene vientos supersónicos que superan los 2.000 km/h, los más rápidos conocidos. Incluso más lejos, la nube de Oort podría contener miles de millones de cometas, extendiéndose hasta un año luz del Sol, un límite tan lejano que marca el verdadero borde del dominio solar. El Sistema Solar no deja de recordarnos que, aunque lo conocemos desde hace siglos, todavía guarda misterios dignos de explorarse. ARTICULOS ORIGINALES: NASA. (2024). Solar System Exploration. NASA Jet Propulsion Laboratory. Recuperado de https://solarsystem.nasa.gov European Space Agency (ESA). (2023). Planets and Moons. ESA Science & Technology. Recuperado de https://www.esa.int  National Geographic. (2023). Curiosidades del sistema solar. National Geographic en Español. Recuperado de https://www.ngenespanol.com  Howell, E. (2023). Strange Facts About the Solar System. Space.com. Recuperado de https://www.space.com Jet Propulsion Laboratory (JPL). (2024). Planetary Factsheets. NASA JPL. Recuperado de https://nssdc.gsfc.nasa.gov/planetary/factsheet/ ",
+    "imageData": "https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-ab58-622f-a3c3-635de6095183/raw?se=2025-10-12T02%3A01%3A17Z&sp=r&sv=2024-08-04&sr=b&scid=e8230a10-0bb0-5bb2-8810-fb0cf1dfae53&skoid=e9d2f8b1-028a-4cff-8eb1-d0e66fbefcca&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-11T23%3A25%3A52Z&ske=2025-10-12T23%3A25%3A52Z&sks=b&skv=2024-08-04&sig=P4UM7XHuzoU6gX118wZkvXVOLdjsbUCeoeF3rDLD4ZQ%3D"
   },
   {
     "id": "nebula01",
     "page": "nebulosas",
-    "title": "La Nebulosa de Orión",
-    "content": "Visible a simple vista, la Nebulosa de Orión es una de las guarderías estelares más cercanas y estudiadas. Dentro de sus nubes de gas y polvo, nuevas estrellas y sistemas planetarios están en pleno proceso de formación.",
-    "imageData": "images/orion-nebula.jpg"
-  },
-  {
-    "id": "galaxy01",
-    "page": "galaxias",
-    "title": "Andrómeda: Nuestra Vecina Galáctica",
-    "content": "La galaxia de Andrómeda es la galaxia espiral más grande y cercana a la Vía Láctea. Se encuentra en curso de colisión con nuestra galaxia, un evento que ocurrirá en aproximadamente 4.5 mil millones de años.",
-    "imageData": "images/andromeda.jpg"
-  },
-  {
-    "id": "const01",
-    "page": "constelaciones",
-    "title": "La Osa Mayor y la Estrella Polar",
-    "content": "La Osa Mayor es una de las constelaciones más reconocibles del hemisferio norte. Dos de sus estrellas, Merak y Dubhe, son conocidas como 'las apuntadoras' porque señalan directamente a Polaris, la Estrella del Norte.",
-    "imageData": "images/ursa-major.jpg"
+    "title": "NEBULOSAS: LAS GUARDERIAS ESTELARES",
+    "content": "Una nebulosa es una nube gigante de polvo y gas en el espacio. Algunas nebulosas provienen del gas y el polvo expulsado por la explosión de una estrella moribunda, como una supernova. Otras nebulosas son regiones donde comienzan a formarse nuevas estrellas. Por esta razón, algunas nebulosas se llaman viveros de estrellas. Las nebulosas están hechas de polvo y gases—, principalmente hidrógeno y helio. El polvo y los gases en una nebulosa están muy dispersos, pero la gravedad puede comenzar a juntar grupos de polvo y gas. A medida que estos grupos se hacen más y más grandes, su fuerza gravitacional se hace más y más fuerte. Finalmente, el grupo de polvo y gas se vuelve tan grande que se colapsa por su propia gravedad. El colapso hace que el material en el centro de la nube se caliente, y este núcleo caliente es el comienzo de una estrella.  ARTICULO ORIGINAL: What is a nebula? (s/f). Nasa.gov. Recuperado el 12 de octubre de 2025, de https://spaceplace.nasa.gov/nebula/sp",
+    "imageData": "https://spaceplace.nasa.gov/nebula/sp/star-forming_region_carina.sp.jpg"
   }
 ]
