@@ -1,136 +1,116 @@
-/* --- Estilos para las Tarjetas de Artículos (como en tu imagen) --- */
-
-.articles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2 columnas en pantallas grandes, 1 en pequeñas */
-    gap: 30px; /* Espacio entre las tarjetas */
-    padding-bottom: 60px; /* Espacio inferior */
-    justify-items: center; /* Centra las tarjetas en el grid */
-}
-
-/* Tarjeta individual */
-.article-card {
-    background: rgba(15, 22, 42, 0.8); /* Fondo oscuro */
-    border-radius: 12px; /* Bordes redondeados */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra suave */
-    overflow: hidden; /* Asegura que la imagen no se desborde */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%; /* Ocupa todo el ancho de su columna */
-    max-width: 380px; /* Ancho máximo para que no crezcan demasiado */
-    display: flex;
-    flex-direction: column; /* Contenido apilado verticalmente */
-}
-
-.article-card:hover {
-    transform: translateY(-8px); /* Efecto al pasar el ratón */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-}
-
-/* Contenedor de la imagen superior de la tarjeta */
-.card-header-image {
-    width: 100%;
-    height: 150px; /* Altura fija para la imagen */
-    overflow: hidden; /* Corta la imagen si es muy grande */
-    display: flex; /* Para centrar la imagen */
-    justify-content: center;
-    align-items: center;
-    background-color: #0b132b; /* Fondo si no hay imagen */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.card-header-image img {
-    width: 100%; /* La imagen ocupa todo el ancho */
-    height: 100%; /* La imagen ocupa toda la altura */
-    object-fit: cover; /* Recorta la imagen para que cubra el espacio sin deformarse */
-    display: block; /* Elimina espacios extra debajo de la imagen */
-}
-
-/* Contenido de la tarjeta (texto y botón) */
-.card-content {
+/* === Tarjeta individual (Estilo de la página de Artículos) === */
+.article {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Permite que el contenido crezca para ocupar el espacio restante */
-}
-
-.card-title {
-    font-size: 24px;
-    color: #eaf6ff;
-    margin: 0 0 10px;
-    text-shadow: 0 0 8px rgba(130, 180, 255, 0.5);
-    line-height: 1.2;
-}
-
-.card-summary {
-    font-size: 15px;
-    color: #cfd8dc;
-    margin-bottom: 15px;
-    line-height: 1.5;
-    flex-grow: 1; /* Permite que el resumen ocupe el espacio disponible */
-}
-
-/* Contenido completo (oculto por defecto) */
-.card-full-content {
-    max-height: 0;
+    gap: 15px;
+    box-shadow: 0 0 20px rgba(80, 120, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
     overflow: hidden;
-    transition: max-height 0.5s ease-out, opacity 0.5s ease;
-    opacity: 0;
-    margin-top: 10px;
-    color: #b0bec5;
-    font-size: 14px;
-    line-height: 1.6;
 }
 
-.card-full-content.expanded {
-    max-height: 500px; /* Suficientemente grande para la mayoría de los textos */
-    opacity: 1;
+.article::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left,
+            rgba(100, 180, 255, 0.08),
+            transparent 70%);
+    z-index: 0;
 }
 
-/* Botón "Leer más" */
-.card-button {
-    background: linear-gradient(90deg, rgba(80, 140, 255, 0.15), rgba(100, 80, 255, 0.1));
+.article * {
+    position: relative;
+    z-index: 1;
+}
+
+.article:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(80, 120, 255, 0.25);
+}
+
+.article-title {
+    margin: 0;
+    font-size: 22px;
+    color: #eaf6ff;
+    text-shadow: 0 0 6px rgba(100, 150, 255, 0.35);
+}
+
+.article-body {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.article img {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.excerpt p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 15px;
+    color: rgba(235, 245, 255, 0.95);
+}
+
+.read-more-btn {
+    background: linear-gradient(90deg,
+            rgba(120, 160, 255, 0.12),
+            rgba(140, 100, 255, 0.1));
     color: #eaf2ff;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
+    padding: 8px 14px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
-    transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-    margin-top: auto; /* Empuja el botón al final de la tarjeta */
-    align-self: flex-start; /* Alinea el botón a la izquierda */
+    margin-top: auto; /* Empuja el botón hacia abajo */
+    font-size: 14px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
 }
 
-.card-button:hover {
-    background: rgba(80, 140, 255, 0.3);
+.read-more-btn:hover {
+    background: rgba(80, 140, 255, 0.25);
     transform: translateY(-2px);
-    border-color: rgba(120, 160, 255, 0.4);
 }
 
-/* Responsive para las tarjetas (en tu media query existente, o añade esta si no tienes) */
-@media (max-width: 768px) {
-    .articles-grid {
-        grid-template-columns: 1fr; /* Una sola columna en móviles */
-        gap: 20px;
-    }
-
-    .article-card {
-        max-width: 95%; /* Ocupa casi todo el ancho disponible */
-        margin: 0 auto; /* Centra la tarjeta */
-    }
-
-    .card-title {
-        font-size: 20px;
-    }
-
-    .card-summary {
-        font-size: 14px;
-    }
+/* --- ESTA ES LA PARTE CLAVE --- */
+/* Contenido completo, oculto por defecto */
+.full-content {
+    margin-top: 10px;
+    color: rgba(235, 245, 255, 0.95);
+    font-size: 15px;
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.4s ease-out, margin-top 0.5s ease-out;
 }
-/* --- Regla para expandir el contenido --- */
-/* Cuando la tarjeta tiene la clase 'expanded', el contenido completo se hace visible */
 
-.article-card.expanded .card-full-content {
-    max-height: 1000px; /* Un valor alto para que quepa todo el texto */
+/* Cuando la clase 'expanded' se añade, el contenido se muestra */
+.full-content.expanded {
+    max-height: 2000px; /* Un valor alto para que quepa todo */
     opacity: 1;
-    margin-top: 15px; /* Añadimos un pequeño espacio superior */
+    margin-top: 15px; /* Añade un espacio cuando se expande */
+}
+/* ------------------------------- */
+
+/* --- Media Queries para Responsive --- */
+@media (max-width: 900px) {
+    .article-body {
+        flex-direction: column;
+    }
+
+    .article img {
+        width: 100%;
+        height: 180px;
+    }
 }
