@@ -7,7 +7,7 @@
   <title>Constelaciones</title>
 
   <link rel="stylesheet" href="constelaciones.css">
-  <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="Articulos.css">
 
 </head>
 
@@ -59,8 +59,8 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      // !!! ASEGÚRATE DE CAMBIAR ESTO PARA CADA PÁGINA !!!
-      const pageIdentifier = 'constelaciones'; // <-- ¡Cambia esto!
+      // Identificador único para esta página
+      const pageIdentifier = 'constelaciones'; // <-- ¡Ajustado para esta página!
 
       const articlesContainer = document.getElementById('articles-container');
 
@@ -72,7 +72,7 @@
         const articlesForThisPage = allArticles.filter(article => article.page === pageIdentifier);
 
         if (articlesForThisPage.length === 0) {
-          articlesContainer.innerHTML = '<p>Aún no hay publicaciones en esta sección.</p>';
+          articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
           return;
         }
 
@@ -80,28 +80,26 @@
 
         articlesForThisPage.forEach(article => {
           const articleDiv = document.createElement('div');
-          // Usamos la clase 'article' para que coincida con el nuevo CSS
           articleDiv.className = 'article';
 
           const summary = article.content.length > 200 ? article.content.slice(0, 200) + '...' : article.content;
 
           articleDiv.innerHTML = `
-                    <h2 class="article-title">${article.title}</h2>
-                    <div class="article-body">
-                        ${article.imageData ? `<img src="${article.imageData}" alt="${article.title}">` : ''}
-                        <div class="excerpt">
-                            <p>${summary}</p>
+                        <h2 class="article-title">${article.title}</h2>
+                        <div class="article-body">
+                            <img src="${article.imageData || ''}" alt="${article.title}">
+                            <div class="excerpt">
+                                <p>${summary}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="full-content">
-                        <p>${article.content}</p>
-                    </div>
-                    <button class="read-more-btn">Leer más</button>
-                `;
+                        <div class="full-content">
+                            <p>${article.content}</p>
+                        </div>
+                        <button class="read-more-btn">Leer más</button>
+                    `;
 
           articlesContainer.appendChild(articleDiv);
 
-          // Lógica para el botón
           const readMoreBtn = articleDiv.querySelector('.read-more-btn');
           const fullContent = articleDiv.querySelector('.full-content');
 
@@ -112,7 +110,7 @@
         });
       } catch (error) {
         console.error('Error al cargar las publicaciones:', error);
-        articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar.</p>';
+        articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar las publicaciones.</p>';
       }
     });
   </script>
