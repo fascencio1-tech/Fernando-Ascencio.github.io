@@ -1,153 +1,128 @@
-/* cards.css - Estilos COMPLETOS para tarjetas horizontales y expandibles */
+/* --- Estilos para las Tarjetas de Artículos (como en tu imagen) --- */
 
-/* Contenedor principal: una sola columna para las tarjetas */
-#articles-container {
+.articles-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Una sola columna que ocupa todo el ancho */
-    gap: 30px; /* Espacio entre tarjetas */
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2 columnas en pantallas grandes, 1 en pequeñas */
+    gap: 30px; /* Espacio entre las tarjetas */
+    padding-bottom: 60px; /* Espacio inferior */
+    justify-items: center; /* Centra las tarjetas en el grid */
 }
 
-/* Estilo principal de la tarjeta: horizontal */
+/* Tarjeta individual */
 .article-card {
-    background-color: rgba(21, 28, 46, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
+    background: rgba(15, 22, 42, 0.8); /* Fondo oscuro */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra suave */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Ocupa todo el ancho de su columna */
+    max-width: 380px; /* Ancho máximo para que no crezcan demasiado */
     display: flex;
-    flex-direction: row; /* Imagen a la izquierda, contenido a la derecha */
-    backdrop-filter: blur(5px);
-    max-height: 220px; /* Altura inicial fija */
-    transition: max-height 0.7s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease;
+    flex-direction: column; /* Contenido apilado verticalmente */
 }
 
-/* Cuando se expande, la altura máxima aumenta */
-.article-card.expanded {
-    max-height: 1000px; /* Un valor alto para que quepa todo el texto */
-}
-
-/* Efecto al pasar el mouse por encima */
 .article-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 183, 255, 0.25);
+    transform: translateY(-8px); /* Efecto al pasar el ratón */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* Contenedor de la imagen (CORREGIDO) */
-.card-image-container {
-    flex-basis: 35%;
-    flex-shrink: 0;
-    height: 100%;
-    min-height: 220px; /* Altura mínima igual a la tarjeta colapsada */
-    overflow: hidden;
-}
-
-.card-image-container img {
+/* Contenedor de la imagen superior de la tarjeta */
+.card-header-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que la imagen cubra el área sin deformarse */
-    transition: transform 0.4s ease;
+    height: 150px; /* Altura fija para la imagen */
+    overflow: hidden; /* Corta la imagen si es muy grande */
+    display: flex; /* Para centrar la imagen */
+    justify-content: center;
+    align-items: center;
+    background-color: #0b132b; /* Fondo si no hay imagen */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.article-card:hover .card-image-container img {
-    transform: scale(1.05);
+.card-header-image img {
+    width: 100%; /* La imagen ocupa todo el ancho */
+    height: 100%; /* La imagen ocupa toda la altura */
+    object-fit: cover; /* Recorta la imagen para que cubra el espacio sin deformarse */
+    display: block; /* Elimina espacios extra debajo de la imagen */
 }
 
-/* Contenido de la tarjeta (CORREGIDO) */
+/* Contenido de la tarjeta (texto y botón) */
 .card-content {
-    padding: 25px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    color: #c0c8e7;
-    flex-basis: 65%;
-    min-width: 0; /* Evita que el contenido desborde y empuje la imagen */
+    flex-grow: 1; /* Permite que el contenido crezca para ocupar el espacio restante */
 }
 
 .card-title {
-    font-size: 1.25rem;
-    color: #ffffff;
-    margin: 0 0 15px 0;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.card-summary,
-.card-full-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 24px;
+    color: #eaf6ff;
+    margin: 0 0 10px;
+    text-shadow: 0 0 8px rgba(130, 180, 255, 0.5);
+    line-height: 1.2;
 }
 
 .card-summary {
-    margin-bottom: 20px;
+    font-size: 15px;
+    color: #cfd8dc;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    flex-grow: 1; /* Permite que el resumen ocupe el espacio disponible */
 }
 
 /* Contenido completo (oculto por defecto) */
 .card-full-content {
-    opacity: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out 0.2s;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease;
+    opacity: 0;
+    margin-top: 10px;
+    color: #b0bec5;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.card-full-content p {
-    margin: 0;
-    padding-bottom: 20px;
-}
-
-/* Estilo que se aplica cuando la tarjeta se expande */
-.article-card.expanded .card-full-content {
-    max-height: 1000px;
+.card-full-content.expanded {
+    max-height: 500px; /* Suficientemente grande para la mayoría de los textos */
     opacity: 1;
 }
 
 /* Botón "Leer más" */
 .card-button {
-    background-color: rgba(45, 59, 92, 0.8);
-    color: #e0e6f1;
+    background: linear-gradient(90deg, rgba(80, 140, 255, 0.15), rgba(100, 80, 255, 0.1));
+    color: #eaf2ff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px 20px;
     border-radius: 8px;
-    text-decoration: none;
-    text-align: center;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    align-self: flex-start;
     cursor: pointer;
-    margin-top: auto; /* Empuja el botón al final */
+    font-size: 15px;
+    transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    margin-top: auto; /* Empuja el botón al final de la tarjeta */
+    align-self: flex-start; /* Alinea el botón a la izquierda */
 }
 
 .card-button:hover {
-    background-color: rgba(0, 183, 255, 0.9);
-    color: #ffffff;
+    background: rgba(80, 140, 255, 0.3);
+    transform: translateY(-2px);
+    border-color: rgba(120, 160, 255, 0.4);
 }
-/* --- Media Query para Dispositivos Móviles --- */
-/* Estos estilos se aplicarán solo si la pantalla mide 768px de ancho o menos */
 
+/* Responsive para las tarjetas (en tu media query existente, o añade esta si no tienes) */
 @media (max-width: 768px) {
+    .articles-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+        gap: 20px;
+    }
 
-    /* Hacemos que la tarjeta se vuelva vertical */
     .article-card {
-        flex-direction: column; /* Cambia de horizontal (row) a vertical (column) */
-        max-height: none;       /* Quitamos la altura máxima para que pueda crecer */
+        max-width: 95%; /* Ocupa casi todo el ancho disponible */
+        margin: 0 auto; /* Centra la tarjeta */
     }
 
-    /* La imagen ahora ocupa todo el ancho */
-    .card-image-container {
-        flex-basis: auto;       /* El ancho ya no es fijo */
-        min-height: 180px;      /* Le damos una altura mínima a la imagen */
-        height: 180px;
+    .card-title {
+        font-size: 20px;
     }
 
-    /* Ajustamos el padding del contenido */
-    .card-content {
-        padding: 20px;
-    }
-
-    /* Centramos el botón y le damos más espacio */
-    .card-button {
-        align-self: center; /* Centra el botón */
-        width: 80%;         /* Hacemos el botón más grande y fácil de tocar */
-        text-align: center;
-        margin-top: 20px;
+    .card-summary {
+        font-size: 14px;
     }
 }
