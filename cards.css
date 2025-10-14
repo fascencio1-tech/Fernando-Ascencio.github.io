@@ -10,7 +10,6 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-    min-height: 400px;
 }
 
 .article::before {
@@ -83,7 +82,6 @@
     transform: translateY(-2px);
 }
 
-/* --- ESTA ES LA PARTE CLAVE --- */
 /* Contenido completo, oculto por defecto */
 .full-content {
     margin-top: 10px;
@@ -102,9 +100,8 @@
     opacity: 1;
     margin-top: 15px; /* Añade un espacio cuando se expande */
 }
-/* ------------------------------- */
 
-/* --- Media Queries para Responsive --- */
+/* Media Queries para Responsive */
 @media (max-width: 900px) {
     .article-body {
         flex-direction: column;
