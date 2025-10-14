@@ -126,3 +126,11 @@
         font-size: 14px;
     }
 }
+/* --- Regla para expandir el contenido --- */
+/* Cuando la tarjeta tiene la clase 'expanded', el contenido completo se hace visible */
+
+.article-card.expanded .card-full-content {
+    max-height: 1000px; /* Un valor alto para que quepa todo el texto */
+    opacity: 1;
+    margin-top: 15px; /* Añadimos un pequeño espacio superior */
+}
