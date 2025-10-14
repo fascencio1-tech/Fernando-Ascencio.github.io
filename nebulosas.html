@@ -45,16 +45,20 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      // Identificador único para esta página
-      const pageIdentifier = 'nebulosas';
+      // 1. Identificador único de esta página (debe coincidir con el valor "page" en el JSON)
+      const pageIdentifier = 'sistemaSolar';
 
       const articlesContainer = document.getElementById('articles-container');
 
       try {
+        // 2. Leemos el archivo JSON central
         const response = await fetch('publications.json');
-        if (!response.ok) throw new Error('No se encontró publications.json');
+        if (!response.ok) {
+          throw new Error('No se pudo encontrar el archivo publications.json');
+        }
         const allArticles = await response.json();
 
+        // 3. Filtramos para obtener solo los artículos de ESTA página
         const articlesForThisPage = allArticles.filter(article => article.page === pageIdentifier);
 
         if (articlesForThisPage.length === 0) {
@@ -64,22 +68,30 @@
 
         articlesContainer.innerHTML = '';
 
+        // 4. Creamos las tarjetas con los datos filtrados
         articlesForThisPage.forEach(article => {
           const articleCard = document.createElement('div');
           articleCard.className = 'article-card';
 
-          const summary = article.content.length > 150 ? article.content.slice(0, 150) + '...' : article.content;
+          const summary = article.content.length > 150
+            ? article.content.slice(0, 150) + '...'
+            : article.content;
+
+          // Esta línea usa la imagen como fondo y es la ÚNICA forma en que se añade.
           const imageStyle = article.imageData ? `style="background-image: url('${article.imageData}');"` : '';
 
+          // Esta estructura HTML es la correcta y no incluye ninguna etiqueta <img>
           articleCard.innerHTML = `
-                        <div class="card-image-container" ${imageStyle}></div>
-                        <div class="card-content">
-                            <h2 class="card-title">${article.title}</h2>
-                            <p class="card-summary">${summary}</p>
-                            <div class="card-full-content"><p>${article.content}</p></div>
-                            <button class="card-button">Leer más</button>
+                    <div class="card-image-container" ${imageStyle}></div>
+                    <div class="card-content">
+                        <h2 class="card-title">${article.title}</h2>
+                        <p class="card-summary">${summary}</p>
+                        <div class="card-full-content">
+                            <p>${article.content}</p>
                         </div>
-                    `;
+                        <button class="card-button">Leer más</button>
+                    </div>
+                `;
 
           articlesContainer.appendChild(articleCard);
 
@@ -90,6 +102,7 @@
             readMoreBtn.textContent = card.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
           });
         });
+
       } catch (error) {
         console.error('Error al cargar las publicaciones:', error);
         articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar las publicaciones.</p>';

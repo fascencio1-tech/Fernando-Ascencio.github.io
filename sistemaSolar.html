@@ -56,7 +56,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            // 1. Identificador único de esta página (¡CORREGIDO!)
+            // 1. Identificador único de esta página (debe coincidir con el valor "page" en el JSON)
             const pageIdentifier = 'sistemaSolar';
 
             const articlesContainer = document.getElementById('articles-container');
@@ -88,19 +88,21 @@
                         ? article.content.slice(0, 150) + '...'
                         : article.content;
 
+                    // Esta línea usa la imagen como fondo y es la ÚNICA forma en que se añade.
                     const imageStyle = article.imageData ? `style="background-image: url('${article.imageData}');"` : '';
 
+                    // Esta estructura HTML es la correcta y no incluye ninguna etiqueta <img>
                     articleCard.innerHTML = `
-                        <div class="card-image-container" ${imageStyle}></div>
-                        <div class="card-content">
-                            <h2 class="card-title">${article.title}</h2>
-                            <p class="card-summary">${summary}</p>
-                            <div class="card-full-content">
-                                <p>${article.content}</p>
-                            </div>
-                            <button class="card-button">Leer más</button>
+                    <div class="card-image-container" ${imageStyle}></div>
+                    <div class="card-content">
+                        <h2 class="card-title">${article.title}</h2>
+                        <p class="card-summary">${summary}</p>
+                        <div class="card-full-content">
+                            <p>${article.content}</p>
                         </div>
-                    `;
+                        <button class="card-button">Leer más</button>
+                    </div>
+                `;
 
                     articlesContainer.appendChild(articleCard);
 
