@@ -206,3 +206,32 @@
     .button { width: 72px; height: 72px; }
     .button svg { width: 40px; height: 40px; }
   }
+  /* === Responsive para Dispositivos Móviles === */
+@media (max-width: 768px) {
+
+    /* Hacemos la caja principal más adaptable */
+    .box {
+        width: 90%; /* Ocupa el 90% del ancho en lugar de un tamaño fijo */
+        padding: 25px; /* Reducimos un poco el padding */
+    }
+
+    /* Reducimos el tamaño del título */
+    .title {
+        font-size: 2.5rem; /* Hacemos el título más pequeño */
+    }
+
+    /* Ajustamos el texto */
+    .text {
+        font-size: 1rem; /* Ajustamos el tamaño del texto */
+    }
+
+    /* Apilamos los botones verticalmente */
+    .buttons {
+        flex-direction: column; /* Cambia de fila a columna */
+        gap: 15px; /* Añade espacio entre los botones apilados */
+    }
+
+    .shadow__btn {
+        width: 100%; /* Hacemos que los botones ocupen todo el ancho */
+    }
+}
