@@ -79,7 +79,6 @@ body {
 .top-sidebar nav {
     display: flex;
     gap: 10px;
-    margin-right: 5%; /* <<<--- AQUÍ ESTÁ LA CORRECCIÓN */
 }
 
 .top-sidebar nav a {
@@ -310,75 +309,138 @@ body {
     opacity: 1;
 }
 
-/* === Responsive para el sidebar === */
+/* === Responsive para Dispositivos Móviles === */
 @media (max-width: 768px) {
+    /* Ajustes generales del contenedor */
+    .container {
+        padding: 15px; /* Reduce el padding en móviles */
+        margin-top: 80px; /* Ajusta el margen superior para dejar espacio a la barra de navegación */
+    }
+
+    /* Barra de navegación */
     .top-sidebar {
-        flex-direction: column;
+        flex-direction: column; /* Apila logo y nav */
         align-items: flex-start;
-        padding: 15px 20px;
+        padding: 10px 15px;
+        height: auto; /* Permite que la barra se ajuste a su contenido */
     }
 
     .top-sidebar .logo {
-        margin-bottom: 10px;
-        font-size: 20px;
+        margin-bottom: 10px; /* Espacio debajo del logo */
+        font-size: 20px; /* Reduce el tamaño del logo */
     }
 
     .top-sidebar nav {
-        flex-direction: column;
-        gap: 15px;
-        margin-right: 0; /* Reseteamos el margen en móvil */
+        flex-direction: column; /* Apila los enlaces de navegación */
+        width: 100%; /* Ocupa todo el ancho */
+        gap: 5px; /* Reduce el espacio entre enlaces */
+        display: none; /* OCULTA EL MENÚ POR DEFECTO EN MÓVILES */
     }
 
-    .top-sidebar a {
-        font-size: 18px;
+    .top-sidebar nav.active {
+        display: flex; /* MUESTRA EL MENÚ CUANDO ESTÁ ACTIVO */
+    }
+
+    .top-sidebar nav a {
         padding: 10px 15px;
-        width: 100%;
+        font-size: 15px;
+        width: auto; /* Elimina el ancho fijo */
+        text-align: left;
     }
-}
 
-/* === Responsive === */
-@media (max-width: 1100px) {
+    /* Menú desplegable dentro de la navegación */
+    .dropdown {
+        width: 100%; /* El dropdown ocupa todo el ancho */
+    }
+
+    .dropdown-content {
+        position: static; /* Cambia a estático para que fluya con el resto del menú */
+        width: 100%;
+        min-width: auto;
+        border: none; /* Elimina el borde extra */
+        box-shadow: none;
+        background-color: rgba(15, 22, 42, 0.6); /* Un poco más transparente */
+        padding: 0;
+        border-radius: 0;
+        animation: none; /* Deshabilita la animación de aparición */
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .dropdown-content a {
+        padding-left: 30px; /* Indenta los elementos del submenú */
+        font-size: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05); /* Separa los ítems del submenú */
+    }
+
+    /* Botón de Hamburguesa (será añadido en HTML) */
+    .menu-toggle {
+        display: block; /* Muestra el botón de hamburguesa */
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: #eaf6ff;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 1002;
+    }
+
+    /* Encabezado Hero */
+    .hero {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero p, .hero h6 {
+        font-size: 0.85rem;
+    }
+
+    /* Lista de Artículos */
     .articles {
-        grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 20px;
+        padding-bottom: 40px;
     }
 
-    .article-body {
-        flex-direction: column;
-    }
-
-    .article img {
-        width: 100%;
-        height: auto;
-        max-height: 260px;
-    }
-}
-/* === Responsive adicional para las tarjetas de artículos === */
-@media (max-width: 768px) {
-
-    /* Hacemos que la tarjeta se vuelva vertical */
+    /* Tarjeta individual */
     .article {
-        /* Tus tarjetas ya usan flex-direction: column, así que esto no es necesario */
-        /* Lo que sí podemos hacer es ajustar el padding para pantallas pequeñas */
         padding: 15px;
     }
 
-    /* Hacemos que la imagen ocupe todo el ancho de la tarjeta */
+    .article-title {
+        font-size: 20px;
+    }
+
     .article-body {
-        flex-direction: column;
+        flex-direction: column; /* Apila imagen y texto en móviles */
+        gap: 10px;
     }
 
     .article img {
-        width: 100%; /* La imagen ocupará todo el ancho de la tarjeta */
-        height: 180px; /* Le damos una altura fija para consistencia */
+        width: 100%; /* La imagen ocupa todo el ancho */
+        height: 180px; /* Altura fija para las imágenes */
+        max-height: 250px; /* Altura máxima */
         object-fit: cover;
     }
-    
-    /* Centramos el botón y lo hacemos más grande */
+
+    .excerpt p {
+        font-size: 14px;
+    }
+
     .read-more-btn {
         align-self: center; /* Centra el botón */
-        width: 80%;         /* Hacemos el botón más grande y fácil de tocar */
+        width: 90%; /* Hace el botón más ancho */
+        font-size: 14px;
+        padding: 10px 15px;
         text-align: center;
-        margin-top: 15px;
+    }
+
+    .full-content {
+        font-size: 13px;
     }
 }

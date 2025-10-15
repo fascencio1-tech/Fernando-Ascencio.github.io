@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículos Generales</title>
-
     <link rel="stylesheet" href="Articulos.css">
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
 </head>
 
 <body>
@@ -47,61 +47,27 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Identificador único para esta página
-            const pageIdentifier = 'articulos';
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.top-sidebar nav');
 
-            const articlesContainer = document.getElementById('articles-container');
-
-            try {
-                const response = await fetch('publications.json');
-                if (!response.ok) throw new Error('No se encontró publications.json');
-                const allArticles = await response.json();
-
-                const articlesForThisPage = allArticles.filter(article => article.page === pageIdentifier);
-
-                if (articlesForThisPage.length === 0) {
-                    articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
-                    return;
-                }
-
-                articlesContainer.innerHTML = '';
-
-                // En esta página, usamos un diseño diferente (el que ya tenías)
-                articlesForThisPage.forEach(article => {
-                    const articleDiv = document.createElement('div');
-                    articleDiv.className = 'article';
-
-                    const summary = article.content.length > 200 ? article.content.slice(0, 200) + '...' : article.content;
-
-                    articleDiv.innerHTML = `
-                        <h2 class="article-title">${article.title}</h2>
-                        <div class="article-body">
-                            <img src="${article.imageData || ''}" alt="${article.title}">
-                            <div class="excerpt">
-                                <p>${summary}</p>
-                            </div>
-                        </div>
-                        <div class="full-content">
-                            <p>${article.content}</p>
-                        </div>
-                        <button class="read-more-btn">Leer más</button>
-                    `;
-
-                    articlesContainer.appendChild(articleDiv);
-
-                    const readMoreBtn = articleDiv.querySelector('.read-more-btn');
-                    const fullContent = articleDiv.querySelector('.full-content');
-
-                    readMoreBtn.addEventListener('click', () => {
-                        fullContent.classList.toggle('expanded');
-                        readMoreBtn.textContent = fullContent.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
-                    });
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
                 });
-            } catch (error) {
-                console.error('Error al cargar las publicaciones:', error);
-                articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar las publicaciones.</p>';
             }
+
+            // Ocultar menú si se hace clic fuera o se redimensiona a desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) { // Mismo breakpoint que tu CSS
+                    nav.classList.remove('active');
+                }
+            });
+            document.addEventListener('click', (event) => {
+                if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                    nav.classList.remove('active');
+                }
+            });
         });
     </script>
 
