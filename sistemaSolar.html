@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Solar</title>
-
     <link rel="stylesheet" href="sistemasolar.css">
-    <link rel="stylesheet" href="Articulos.css"> 
-
+    <link rel="stylesheet" href="Articulos.css">
 </head>
-<body>
 
+<body>
     <div class="background-container">
         <div class="sun"></div>
         <div class="planet mercury"></div>
@@ -24,9 +23,14 @@
         <div id="stars-container"></div>
     </div>
 
-    <div class="content-wrapper">
-        <h1>Bienvenido a la sección del Sistema Solar</h1>
-        <div id="articles-container" class="articles"></div> 
+    <div class="container">
+        <main class="content">
+            <section class="hero">
+                <h1>Sistema Solar</h1>
+                <p>Explora nuestro vecindario cósmico, desde el ardiente Sol hasta los lejanos gigantes de hielo.</p>
+            </section>
+            <div id="articles-container" class="articles"></div>
+        </main>
     </div>
 
     <script>
@@ -51,8 +55,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            // Identificador único para esta página
-            const pageIdentifier = 'sistemaSolar'; // <-- ¡Ajustado para esta página!
+            // !!! ASEGÚRATE DE CAMBIAR ESTO PARA CADA PÁGINA !!!
+            const pageIdentifier = 'sistemaSolar'; // <-- ¡Cambia esto!
 
             const articlesContainer = document.getElementById('articles-container');
 
@@ -60,11 +64,10 @@
                 const response = await fetch('publications.json');
                 if (!response.ok) throw new Error('No se encontró publications.json');
                 const allArticles = await response.json();
-
                 const articlesForThisPage = allArticles.filter(article => article.page === pageIdentifier);
 
                 if (articlesForThisPage.length === 0) {
-                    articlesContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Aún no hay publicaciones en esta sección.</p>';
+                    articlesContainer.innerHTML = '<p style="text-align: center;">Aún no hay publicaciones en esta sección.</p>';
                     return;
                 }
 
@@ -74,21 +77,23 @@
                     const articleDiv = document.createElement('div');
                     articleDiv.className = 'article';
 
+                    // --- ¡AQUÍ ESTÁ LA CORRECCIÓN! ---
+                    // El resumen solo se usa una vez, ya no se mezcla con el contenido completo.
                     const summary = article.content.length > 200 ? article.content.slice(0, 200) + '...' : article.content;
 
                     articleDiv.innerHTML = `
-                        <h2 class="article-title">${article.title}</h2>
-                        <div class="article-body">
-                            <img src="${article.imageData || ''}" alt="${article.title}">
-                            <div class="excerpt">
-                                <p>${summary}</p>
-                            </div>
+                    <h2 class="article-title">${article.title}</h2>
+                    <div class="article-body">
+                        ${article.imageData ? `<img src="${article.imageData}" alt="${article.title}">` : ''}
+                        <div class="excerpt">
+                            <p>${summary}</p>
                         </div>
-                        <div class="full-content">
-                            <p>${article.content}</p>
-                        </div>
-                        <button class="read-more-btn">Leer más</button>
-                    `;
+                    </div>
+                    <div class="full-content">
+                        <p>${article.content}</p>  </div>
+                    <button class="read-more-btn">Leer más</button>
+                `;
+                    // ------------------------------------
 
                     articlesContainer.appendChild(articleDiv);
 
@@ -102,10 +107,10 @@
                 });
             } catch (error) {
                 console.error('Error al cargar las publicaciones:', error);
-                articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar las publicaciones.</p>';
+                articlesContainer.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar.</p>';
             }
         });
     </script>
-
 </body>
+
 </html>
