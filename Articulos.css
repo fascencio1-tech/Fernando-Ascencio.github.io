@@ -175,7 +175,7 @@ body {
 .full-content.expanded { max-height: 2000px; }
 
 /* === Responsive para Móviles y Tablets === */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     /* --- Barra de Navegación --- */
     .top-sidebar {
         padding: 15px 20px;
