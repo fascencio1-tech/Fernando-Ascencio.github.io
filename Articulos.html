@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículos Generales</title>
     <link rel="stylesheet" href="Articulos.css">
+
 </head>
 
 <body>
-
     <header class="top-sidebar">
-        <div class="logo">STELLAR VIEW</div>
+        <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
         <nav>
             <a href="index.html">Inicio</a>
             <a href="Articulos.html">Artículos</a>
             <div class="dropdown">
-                <a href="#">Más▾</a>
+                <a href="#">Más ▾</a>
                 <div class="dropdown-content">
                     <a href="sistemaSolar.html">Sistema Solar</a>
                     <a href="nebulosas.html">Nebulosas</a>
@@ -30,21 +30,17 @@
 
     <div class="stars"></div>
     <div class="nebula"></div>
+    <h1 class="main-title">STELLAR VIEW</h1>
 
     <div class="container">
         <main class="content">
             <section class="hero">
                 <h1>Artículos</h1>
-                <p>Aquí vas a encontrar artículos, investigaciones, todo sobre el universo: planetas, nebulosas,
-                    constelaciones, etc.</p>
-                <h6>ACLARACIÓN: Muchos de estos artículos los tomo de otras páginas, otras son investigaciones mías. En
-                    cada publicación viene referenciado de dónde saqué la información.</h6>
+                <p>Aquí encontrarás artículos sobre el universo...</p>
             </section>
-
             <div id="articles-container" class="articles"></div>
         </main>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const pageIdentifier = 'articulos';
@@ -103,7 +99,7 @@
         });
     </script>
     <footer>
-        <p>&copy; © 2025 Fernando Ascencio. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Fernando Ascencio. Todos los derechos reservados.</p>
     </footer>
 </body>
 
